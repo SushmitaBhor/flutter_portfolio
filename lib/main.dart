@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 void main() {
   runApp(const PortfolioApp());
@@ -102,10 +104,25 @@ class PortfolioHomePage extends StatelessWidget {
               FadeInUp(
                 duration: const Duration(milliseconds: 1200),
                 child: ProjectCard(
-                  title: 'NomadSAT Workspace Platform',
+                  title: 'NomadSAT — Workspace Booking Platform',
                   description:
-                      'Cross-platform workspace booking platform using Flutter Web and MVVM. Designed responsive UI with live updates via WebSocket.',
-                  techStack: 'Flutter Web, MVVM, WebSocket',
+                      'Flutter Web-based workspace booking and management system. Built interactive map-based modules, implemented MVVM architecture, and real-time updates using WebSocket.',
+                  techStack: 'Flutter Web, MVVM, WebSocket, REST APIs',
+                  webLink: 'https://nomadsat.com/',
+                ),
+              ),
+              FadeInUp(
+                duration: const Duration(milliseconds: 1300),
+                child: ProjectCard(
+                  title: 'iPartner Pro — ICICI Lombard Partner App',
+                  description:
+                      'Flutter mobile app for insurance partners to manage customer policies, leads, and payments. Contributed to UI modules, API integrations, and performance optimization for 10K+ daily users.',
+                  techStack:
+                      'Flutter, REST APIs, Provider/BLoC, Secure Storage',
+                  androidLink:
+                      'https://play.google.com/store/apps/details?id=com.icicilombard.ipartnerpro&pcampaignid=web_share',
+                  iosLink:
+                      'https://apps.apple.com/in/app/ipartner-pro/id1589043830?l=hi',
                 ),
               ),
 
@@ -206,12 +223,28 @@ class ProjectCard extends StatelessWidget {
   final String title;
   final String description;
   final String techStack;
+  final String? androidLink;
+  final String? iosLink;
+  final String? webLink;
+
   const ProjectCard({
     super.key,
     required this.title,
     required this.description,
     required this.techStack,
+    this.androidLink,
+    this.iosLink,
+    this.webLink,
   });
+
+  Future<void> _openLink(String url) async {
+    try {
+      await launchUrlString(url, mode: LaunchMode.externalApplication);
+    } catch (e) {
+      // ignore errors on web; you can add a debug print
+      print('Could not open link: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -248,6 +281,29 @@ class ProjectCard extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: Colors.grey[700],
                 ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  if (androidLink != null)
+                    TextButton.icon(
+                      onPressed: () => _openLink(androidLink!),
+                      icon: const Icon(Icons.android, color: Colors.green),
+                      label: const Text('Play Store'),
+                    ),
+                  if (iosLink != null)
+                    TextButton.icon(
+                      onPressed: () => _openLink(iosLink!),
+                      icon: const Icon(Icons.apple, color: Colors.black),
+                      label: const Text('App Store'),
+                    ),
+                  if (webLink != null)
+                    TextButton.icon(
+                      onPressed: () => _openLink(webLink!),
+                      icon: const Icon(Icons.public, color: Colors.indigo),
+                      label: const Text('Visit Website'),
+                    ),
+                ],
               ),
             ],
           ),
