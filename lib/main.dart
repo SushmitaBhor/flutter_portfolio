@@ -175,9 +175,60 @@ class PortfolioHomePage extends StatelessWidget {
               const SizedBox(height: 12),
               FadeInUp(
                 duration: const Duration(milliseconds: 1100),
-                child: Text(
-                  '📧 sushmitabhor3@gmail.com\n🔗 linkedin.com/in/sushmitabhor\n💻 github.com/SushmitaBhor',
-                  style: GoogleFonts.inter(fontSize: 16, height: 1.6),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text('📧 gmail link: '),
+                        InkWell(
+                          onTap: () async {
+                            launchUrlString(
+                              'mailto:sushmitabhor3@gmail.com}',
+                              mode: LaunchMode.externalApplication,
+                            );
+                          },
+                          child: Text(
+                            'sushmitabhor3@gmail.com',
+                            style: GoogleFonts.inter(fontSize: 16, height: 1.6),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text('🔗 linkedin link: '),
+                        InkWell(
+                          onTap: () async {
+                            launchUrlString(
+                              "https://www.linkedin.com/in/sushmitabhor/",
+                              mode: LaunchMode.externalApplication,
+                            );
+                          },
+                          child: Text(
+                            'linkedin.com/in/sushmitabhor',
+                            style: GoogleFonts.inter(fontSize: 16, height: 1.6),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text('💻 github link: '),
+                        InkWell(
+                          onTap: () async {
+                            launchUrlString(
+                              "https://github.com/SushmitaBhor",
+                              mode: LaunchMode.externalApplication,
+                            );
+                          },
+                          child: Text(
+                            '💻 github.com/SushmitaBhor  ',
+                            style: GoogleFonts.inter(fontSize: 16, height: 1.6),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
 
