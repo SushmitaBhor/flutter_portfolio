@@ -183,7 +183,9 @@ class PortfolioHomePage extends StatelessWidget {
                         InkWell(
                           onTap: () async {
                             launchUrlString(
-                              'mailto:sushmitabhor3@gmail.com',
+                              'mailto:sushmitabhor3@gmail.com?subject='
+                              '&body='
+                              '',
                               mode: LaunchMode.externalApplication,
                             );
                           },
